@@ -10,3 +10,4 @@ int main() {
 	}
 	printf("The factorial of %d is %d\n", num, factorial);
 }
+
