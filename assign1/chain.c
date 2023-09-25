@@ -3,6 +3,32 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+void createProcess(int n, int count)
+{
+    if (n == count)
+    {
+        return;
+    }
+
+    int pid = fork();
+    if (pid == -1)
+    {
+        printf("Fork Failed!\n");
+        exit(1);
+    }
+
+    if (pid == 0)
+    {
+        printf("Processs %d created %d\n", getppid(), getpid());
+        createProcess(n, count + 1);
+        exit(0);
+    }
+    else
+    {
+        wait(NULL);
+    }
+}
+
 int main(int argc, char *argv[])
 {
     if (argc != 2)
@@ -18,24 +44,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    for (int i = 0; i < n; i++)
-    {
-        int pid = fork();
-
-        if (pid == -1)
-        {
-            perror("Fork Failed!");
-            exit(1);
-        }
-
-        if (pid == 0)
-        {
-            printf("Child %d with PID %d\n", i + 1, getpid());
-            exit(0);
-        }
-    }
-
-    printf("Parent process with PID %d created %d child processes.\n", getpid(), n);
+    createProcess(n, 0);
 
     return 0;
 }
