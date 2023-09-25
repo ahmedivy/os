@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
         if (pid == -1)
         {
-            perror("fork");
+            printf("fork failed");
             exit(1);
         }
 
@@ -32,19 +32,12 @@ int main(int argc, char *argv[])
         {
             // This is the child process
             printf("Child %d with PID %d\n", i + 1, getpid());
-            sleep(1); // Sleep briefly to stagger the output
             exit(0);
         }
     }
 
     // This is the parent process
     printf("Parent process with PID %d created %d child processes.\n", getpid(), n);
-
-    // Parent process waits for all child processes to complete
-    for (int i = 0; i < n; i++)
-    {
-        wait(NULL);
-    }
 
     return 0;
 }
