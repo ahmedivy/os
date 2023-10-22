@@ -12,7 +12,7 @@ int main()
     }
     else
     {
-        // sleep(5);
+        sleep(5);
         printf("Child Process with PID = %d and PPID = %d\n", getpid(), getppid());
     }
 

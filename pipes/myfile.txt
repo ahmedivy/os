@@ -1,0 +1,1 @@
+Hi this is a file and ex3 will append text to it.This message is appended to myfile after running ex3.
